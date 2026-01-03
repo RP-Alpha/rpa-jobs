@@ -21,7 +21,7 @@ RegisterNetEvent('rpa-jobs:server:pay', function(jobType)
         local pay = math.floor(Config.Delivery.Pay * mult)
         
         player.Functions.AddMoney('cash', pay)
-        exports['rpa-lib']:Notify(src, "You received $"..pay.." (Level "..level..")", "success")
-        exports['rpa-lib']:Notify(src, "+10 XP", "info")
+        exports['rpa-lib']:Notify(src, _U('job_paid', pay, level), "success")
+        exports['rpa-lib']:Notify(src, _U('job_xp', 10), "info")
     end
 end)
