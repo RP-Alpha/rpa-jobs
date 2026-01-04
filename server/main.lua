@@ -1,6 +1,17 @@
+-- Get player helper
+local function GetPlayer(src)
+    local Framework = exports['rpa-lib']:GetFramework()
+    if Framework then
+        return Framework.Functions.GetPlayer(src)
+    end
+    return nil
+end
+
 RegisterNetEvent('rpa-jobs:server:pay', function(jobType)
     local src = source
-    local player = exports['rpa-lib']:GetFramework().Functions.GetPlayer(src)
+    local player = GetPlayer(src)
+    
+    if not player then return end
     
     if jobType == 'delivery' then
         -- XP Logic
@@ -20,8 +31,8 @@ RegisterNetEvent('rpa-jobs:server:pay', function(jobType)
         
         local pay = math.floor(Config.Delivery.Pay * mult)
         
-        player.Functions.AddMoney('cash', pay)
-        exports['rpa-lib']:Notify(src, _U('job_paid', pay, level), "success")
-        exports['rpa-lib']:Notify(src, _U('job_xp', 10), "info")
+        player.Functions.AddMoney('cash', pay, 'delivery-job')
+        exports['rpa-lib']:Notify(src, "Paid $" .. pay .. " (Level " .. level .. ")", "success")
+        exports['rpa-lib']:Notify(src, "+10 Job XP", "info")
     end
 end)
