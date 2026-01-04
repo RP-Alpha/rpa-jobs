@@ -1,5 +1,23 @@
 Config = {}
 
+-- ============================================
+-- PERMISSION CONFIGURATION
+-- ============================================
+
+-- Admin permissions (manage jobs, adjust pay, etc.)
+Config.AdminPermissions = {
+    groups = { 'admin', 'god' },
+    jobs = {},
+    minGrade = 0,
+    onDuty = false,
+    convar = 'rpa:admins',
+    resourceConvar = 'admin'
+}
+
+-- ============================================
+-- DELIVERY JOB CONFIGURATION
+-- ============================================
+
 Config.Delivery = {
     Depot = vector4(78.9, 112.4, 79.1, 160.0), -- Example coords
     Vehicle = 'benson',
@@ -7,6 +25,13 @@ Config.Delivery = {
     Locations = {
         vector3(-58.9, 65.4, 71.2),
         vector3(154.2, -189.2, 54.2),
+    },
+    -- Permissions to access this job
+    Permissions = {
+        groups = {},
+        jobs = { 'trucker', 'delivery' },
+        minGrade = 0,
+        onDuty = true
     }
 }
 
